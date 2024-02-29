@@ -10,9 +10,7 @@ import (
 // state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// Set if defined
-	if genState.SystemInfo != nil {
-		k.SetSystemInfo(ctx, *genState.SystemInfo)
-	}
+	k.SetSystemInfo(ctx, genState.SystemInfo)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -25,7 +23,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	// Get all systemInfo
 	systemInfo, found := k.GetSystemInfo(ctx)
 	if found {
-		genesis.SystemInfo = &systemInfo
+		genesis.SystemInfo = systemInfo
 	}
 	// this line is used by starport scaffolding # genesis/module/export
 
